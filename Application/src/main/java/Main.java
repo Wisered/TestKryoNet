@@ -1,6 +1,3 @@
-import behind.GameClient;
-import behind.GameServer;
-
 public class Main {
     public static void main(String[] args) {
         if (args.length < 1) {
@@ -9,9 +6,9 @@ public class Main {
         }
 
         if ("server".equalsIgnoreCase(args[0])) {
-            GameServer.startServer();
+            behind.GameServer.startServer();
         } else if ("client".equalsIgnoreCase(args[0])) {
-            GameClient.startClient();
+            behind.GameClient.startClient();
         } else {
             System.out.println("Argument inconnu. Utilisez 'server' ou 'client'.");
         }

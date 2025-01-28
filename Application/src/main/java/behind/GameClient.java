@@ -33,11 +33,22 @@ public class GameClient {
     private static void connectToServer(String serverAddress) {
         try (Socket socket = new Socket(serverAddress, SERVER_PORT);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
-            out.println("Bonjour, serveur !");
-            String response;
-            while ((response = in.readLine()) != null) {
-                System.out.println("Réponse du serveur : " + response);
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))) {
+            new Thread(() -> {
+                try {
+                    String response;
+                    while ((response = in.readLine()) != null) {
+                        System.out.println(response);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+            String userInput;
+            while ((userInput = stdIn.readLine()) != null) {
+                out.println(userInput);
             }
         } catch (IOException e) {
             e.printStackTrace();
