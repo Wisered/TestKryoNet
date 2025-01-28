@@ -1,4 +1,5 @@
-import behind.*;
+import behind.GameClient;
+import behind.GameServer;
 
 public class Main {
     public static void main(String[] args) {
